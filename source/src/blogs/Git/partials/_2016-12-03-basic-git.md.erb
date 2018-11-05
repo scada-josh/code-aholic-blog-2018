@@ -1,0 +1,69 @@
+# การใช้คำสั่ง Git เบื้องต้น
+![separate line][common-01] 
+
+<br/>
+
+## ติดตั้ง Git ให้กับโปรเจ็คของเรา
+
+#### เลือกโปรเจ็คที่ต้องการ ในที่นี้เราจะทำการสร้างโปรเจ็ค `Laravel 5.4` 
+<pre class="prettyprint linenums">
+$ cd /Applications/XAMPP/htdocs
+$ laravel new iwms-project --dev
+$ cd iwms-project
+$ php artisan serve
+</pre>
+
+
+#### ใช้คำสั่งในการสร้าง Git 
+<pre class="prettyprint linenums">
+$ git init
+$ git status
+$ git add -A
+$ git status
+$ git commit -m "iWMS Project - Initial Project"
+$ git log
+</pre>
+
+#### สร้าง `New repository` ใน GitHub ชื่อว่า `iwms-project`
+
+[![ภาพแสดง git-getting-started-001][1]](){: .fancybox-button 
+              data-fancybox-group="git-getting-started-001" 
+              href="<%= current_page.data.baseURL %>images/categories/git/git-getting-started-001.png"} 
+
+
+[![ภาพแสดง git-getting-started-002][2]](){: .fancybox-button 
+              data-fancybox-group="git-getting-started-002" 
+              href="<%= current_page.data.baseURL %>images/categories/git/git-getting-started-002.png"} 
+
+
+#### สร้าง Git Remote
+<pre class="prettyprint linenums">
+$ git remote -v
+$ git remote add origin git@github.com:scada-josh/iwms-project.git
+</pre>
+
+
+
+
+
+#### ใช้โปรแกรม Tower ในการทำงานต่อ อิอิ
+
+[![ภาพแสดง git-getting-started-003][3]](){: .fancybox-button 
+              data-fancybox-group="git-getting-started-003" 
+              href="<%= current_page.data.baseURL %>images/categories/git/git-getting-started-003.png"}
+
+
+
+
+[common-01]: <%= current_page.data.baseURL %>images/blog-common/separate-line.png  
+[common-02]: <%= current_page.data.baseURL %>images/blog-common/separate-line-with-indent.png  
+[common-03]: <%= current_page.data.baseURL %>images/blog-common/icon-h1.png  
+[common-04]: <%= current_page.data.baseURL %>images/blog-common/bookmark-blank-image.png  
+[common-05]: <%= current_page.data.baseURL %>images/blog-common/external-link-15x15.png  
+[common-06]: <%= current_page.data.baseURL %>images/blog-common/external-link-30x30.png
+[common-07]: <%= current_page.data.baseURL %>images/blog-common/separate-line-sub-topic.png
+
+[1]: <%= current_page.data.baseURL %>images/categories/Git/git-getting-started-001.png
+[2]: <%= current_page.data.baseURL %>images/categories/Git/git-getting-started-002.png
+[3]: <%= current_page.data.baseURL %>images/categories/Git/git-getting-started-003.png
+

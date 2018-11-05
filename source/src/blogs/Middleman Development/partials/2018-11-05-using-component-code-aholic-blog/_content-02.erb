@@ -1,0 +1,19 @@
+#### การทำงานกับ Middleman 4.2.1
+---
+
+เปิด Terminal แล้วพิมพ์คำสั่งต่อไปนี้ เพื่อใช้ Terminal session นี้ สลับไปทำงานกับ ruby-2.5.3 (เวอร์ชั่นปัจจุบัน)
+<pre class="prettyprint linenums">
+$ cd ~
+$ rvm get stable --auto-dotfiles
+</pre>
+
+หลังจากนั้นตรวจสอบเวอร์ชั่นของ middleman
+<pre class="prettyprint linenums">
+$ middleman version
+</pre>
+
+เราสามารถทำงานกับ Middleman ได้แล้ว
+<pre class="prettyprint linenums">
+$ cd `myproject_path`
+$ bundle exec middleman build --verbose
+</pre>

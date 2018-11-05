@@ -1,0 +1,311 @@
+# การสร้าง Route ![separate line][common-01] 
+
+สมมุติว่า เราต้องการให้ url เป็นแบบนี้ `http://127.0.0.1:8000/test`
+
+<pre class="prettyprint linenums">
+// homepage route
+ Route::get('/', function () { 
+       return view('welcome');
+});
+
+// test route
+Route::get('test','TestController@index');
+</pre>
+
+
+Creating a Controller
+
+<pre class="prettyprint linenums">
+$ php artisan make:controller TestController
+</pre>
+
+สังเกตผลลัพธ์ ในโฟลเดอร์ `my-sample-project/app/Http/Controllers` เราจะเห็นไฟล์ `TestController.php`
+
+<pre class="prettyprint linenums">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class TestController extends Controller
+{
+    //
+}
+</pre>
+
+ให้ลบไฟล์ `TestController.php` ทิ้งไปก่อน
+
+แล้วให้รันคำสั่ง ต่อไปนี้
+
+<pre class="prettyprint linenums">
+$ php artisan make:controller TestController --resource
+</pre>
+
+สังเกตผลลัพธ์ ในโฟลเดอร์ `my-sample-project/app/Http/Controllers` เราจะเห็นไฟล์ `TestController.php`
+<pre class="prettyprint linenums">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class TestController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        <mark>return 'made it here.';</mark>
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
+
+</pre>
+
+
+[![ภาพแสดง laravel-creating-a-route-001][1]](){: .fancybox-button 
+              data-fancybox-group="laravel-creating-a-route-001" 
+              href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-creating-a-route-001.png"} 
+
+
+แก้ไข index method ในไฟล์ `TestController.php`
+
+
+<pre class="prettyprint linenums">
+/**
+* Display a listing of the resource.
+*
+* @return \Illuminate\Http\Response
+*/
+public function index()
+{
+ return <mark>view('test.index');</mark>
+}
+</pre>
+
+ในบรรทัดนี้ เป็นการบอกว่าให้มันไปหาในโฟลเดอร์ view โดยอยู่ในโฟลเดอร์ `test` ในไฟล์ที่มีชื่อว่า `index.blade.php` ซึ่งก็คือ path `/resources/views/index.blade.php`
+
+ถ้าเราลองเรียก url `http://127.0.0.1:8000/test` พบว่า Error เพราะเรายังไม่ได้สร้างไฟล์ index.blade.php 
+
+[![ภาพแสดง laravel-creating-a-route-002][2]](){: .fancybox-button 
+              data-fancybox-group="laravel-creating-a-route-002" 
+              href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-creating-a-route-002.png"} 
+
+ตอนนี้เรามาสร้างไฟล์ `/resources/views/test/index.blade.php` 
+
+<pre class="prettyprint linenums">
+&lt;h1&gt;This is My Test Page&lt;/h1&gt;
+</pre>
+
+
+[![ภาพแสดง laravel-creating-a-route-003][3]](){: .fancybox-button 
+              data-fancybox-group="laravel-creating-a-route-003" 
+              href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-creating-a-route-003.png"} 
+
+
+#### Blade, Laravel’s templating engine.
+
+เราสามารถส่งผ่านตัวแปรระหว่าง view ผ่านทางเมธอด compact 
+
+`The compact method is native PHP and will allow us to reference $Beatles array in our view page.`
+
+ถ้าเราสามารถส่งตัวแปร แบบหลายค่า ได้
+
+<pre class="prettyprint linenums">
+return view('test.index', compact('Beatles', 'Stones', 'Zeppelin'));
+</pre>
+
+
+ทดลองใช้งาน
+
+ไฟล์ TestController.php (path: `/app/Http/Controllers/TestController.php`)
+<pre class="prettyprint linenums">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class TestController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        <mark>$Beatles = ['John', 'Paul', 'George', 'Ringo'];</mark>
+        <mark>return view('test.index', compact('Beatles'));</mark>
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
+</pre>
+
+
+ไฟล์ index.blade.php ( path: `/resources/views/test/index.blade.php`)
+<pre class="prettyprint linenums">
+@if(count($Beatles) &gt; 0)
+    @foreach($Beatles as $Beatle) 
+        {{ $Beatle }} &lt;br&gt;
+    @endforeach 
+@else
+    &lt;h1&gt; Sorry, nothing to show... &lt;/h1&gt; 
+@endif
+</pre>
+
+สังเกตผลลัพธ์ `http://127.0.0.1:8000/test`
+
+[![ภาพแสดง laravel-creating-a-route-004][4]](){: .fancybox-button 
+              data-fancybox-group="laravel-creating-a-route-004" 
+              href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-creating-a-route-004.png"} 
+
+
+[common-01]: <%= current_page.data.baseURL %>images/blog-common/separate-line.png  
+[common-02]: <%= current_page.data.baseURL %>images/blog-common/separate-line-with-indent.png  
+[common-03]: <%= current_page.data.baseURL %>images/blog-common/icon-h1.png  
+[common-04]: <%= current_page.data.baseURL %>images/blog-common/bookmark-blank-image.png  
+[common-05]: <%= current_page.data.baseURL %>images/blog-common/external-link-15x15.png  
+[common-06]: <%= current_page.data.baseURL %>images/blog-common/external-link-30x30.png
+[common-07]: <%= current_page.data.baseURL %>images/blog-common/separate-line-sub-topic.png
+
+[1]: <%= current_page.data.baseURL %>images/categories/PHP%20-%20Laravel/laravel-creating-a-route-001.png
+[2]: <%= current_page.data.baseURL %>images/categories/PHP%20-%20Laravel/laravel-creating-a-route-002.png
+[3]: <%= current_page.data.baseURL %>images/categories/PHP%20-%20Laravel/laravel-creating-a-route-003.png
+[4]: <%= current_page.data.baseURL %>images/categories/PHP%20-%20Laravel/laravel-creating-a-route-004.png
+
+

@@ -1,0 +1,130 @@
+# การติดตั้งและใช้งาน PHP - Laravel 5.x ![separate line][common-01] 
+
+### 1. Installation - Linux / Unix / OSX ![separate-line-sub-topic][common-07] 
+
+#### Download Composer [![external-link-15x15][common-05]](https://getcomposer.org/download/){: target="_blank"}
+
+เปิด Terminal ให้คัดลอกคำสั่งต่อไปนี้ (ใช้ `sudo` ด้วยนะครับ):
+
+<pre class="prettyprint linenums">
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+</pre>
+
+ในตอนนี้ยังใช้คำสั่งบน Terminal ด้วย `$ composer` ยังไม่สามารใช้งานได้
+
+
+[![ภาพแสดง laravel-installation-001][1]](){: .fancybox-button 
+              data-fancybox-group="laravel-installation-001" 
+              href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-installation-001.png"} 
+
+
+
+<pre class="prettyprint linenums">
+$ mv composer.phar /usr/local/bin/composer
+</pre>
+
+ในตอนนี้สามารถ run คำสั่ง `composer` บน Terminal แทนการใช้คำสั่ง `php composer.phar` ได้แล้ว
+
+[![ภาพแสดง laravel-installation-002][2]](){: .fancybox-button 
+              data-fancybox-group="laravel-installation-002" 
+              href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-installation-002.png"} 
+
+
+
+กำหนด PATH (กรณี Yosemite - OS X 10.10.5 ขึ้นไป, ในที่นี้ใช้ macOS Sierra - OS X 10.12.3)
+For setting the PATH on Yosemite (OS X 10.10.5), use the command below:
+
+<pre class="prettyprint linenums">
+$ echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bash_profile
+</pre>
+
+To reload either quit terminal and start up again or use:
+
+<pre class="prettyprint linenums">
+$ source ~/.bash_profile
+</pre>
+
+Helped me, hope it helps someone else out there!
+
+[![ภาพแสดง laravel-installation-003][3]](){: .fancybox-button 
+              data-fancybox-group="laravel-installation-003" 
+              href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-installation-003.png"} 
+
+
+<br/>
+<br/>
+
+
+### 2. ทดลองสร้างโปรเจ็ค Laravel ![separate-line-sub-topic][common-07] 
+
+สำหรับการสร้างโปรเจ็ค Laravel สามารถทำได้ 2 แบบ คือ 
+
+#### 2.1) สร้างโปรเจ็คผ่านทาง `lavavel` (แบบ Offline)
+
+ก่อนอื่นจะต้องติดตั้ง `laravel` ที่เครื่องของเราก่อน
+
+<pre class="prettyprint linenums">
+$ composer global require "laravel/installer"
+</pre>
+
+หลังจากติดตั้ง laravel เรียบร้อยแล้ว สามารถตรวจสอบได้ด้วยคำสั่ง `laravel`
+<pre class="prettyprint linenums">
+$ laravel
+</pre>
+
+[![ภาพแสดง laravel-installation-004][4]](){: .fancybox-button 
+              data-fancybox-group="laravel-installation-004" 
+              href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-installation-004.png"} 
+
+
+
+หลังจากนั้นสามารถสร้างโปรเจ็ค laravel ใหม่ ผ่านทางคำสั่งต่อไปนี้
+<pre class="prettyprint linenums">
+$ laravel new my-sample-project --dev
+</pre>
+
+<br/>
+
+#### 2.2) สร้างโปรเจ็คผ่านทาง `composer` (แบบ Online)
+
+<pre class="prettyprint linenums">
+$ composer create-project laravel/laravel my-sample-project --prefer-dist
+</pre>
+
+<br/>
+<br/>
+
+### 3. ทดลองรันโปรเจ็ค Laravel ด้วย Laravel development server ![separate-line-sub-topic][common-07] 
+
+<pre class="prettyprint linenums">
+$ cd my-sample-project
+$ php artisan serve
+</pre>
+
+เปิดเว็บบราวเซอร์ ผ่านทาง URL : http://127.0.0.1:8000
+
+[![ภาพแสดง laravel-installation-005][5]](){: .fancybox-button 
+              data-fancybox-group="laravel-installation-005" 
+              href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-installation-005.png"} 
+
+
+
+
+[common-01]: <%= current_page.data.baseURL %>images/blog-common/separate-line.png  
+[common-02]: <%= current_page.data.baseURL %>images/blog-common/separate-line-with-indent.png  
+[common-03]: <%= current_page.data.baseURL %>images/blog-common/icon-h1.png  
+[common-04]: <%= current_page.data.baseURL %>images/blog-common/bookmark-blank-image.png  
+[common-05]: <%= current_page.data.baseURL %>images/blog-common/external-link-15x15.png  
+[common-06]: <%= current_page.data.baseURL %>images/blog-common/external-link-30x30.png
+[common-07]: <%= current_page.data.baseURL %>images/blog-common/separate-line-sub-topic.png
+
+[1]: <%= current_page.data.baseURL %>images/categories/PHP%20-%20Laravel/laravel-installation-001.png
+[2]: <%= current_page.data.baseURL %>images/categories/PHP%20-%20Laravel/laravel-installation-002.png
+[3]: <%= current_page.data.baseURL %>images/categories/PHP%20-%20Laravel/laravel-installation-003.png
+[4]: <%= current_page.data.baseURL %>images/categories/PHP%20-%20Laravel/laravel-installation-004.png
+[5]: <%= current_page.data.baseURL %>images/categories/PHP%20-%20Laravel/laravel-installation-005.png
+
+
