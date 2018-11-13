@@ -1,0 +1,77 @@
+#### การใช้งาน Compiling Assets 
+
+---
+
+แก้ไขไฟล์ `/resources/views/layouts/app.blade.php`
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+&lt;html lang=&quot;{{ str_replace('_', '-', app()-&gt;getLocale()) }}&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+<mark>        &lt;link rel=&quot;stylesheet&quot; href=&quot;{{ asset('css/app.css') }}&quot; type=&quot;text/css&quot;&gt;</mark>
+        &lt;title&gt;{{ config('app.name')}}&lt;/title&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+        @yield('content')
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+รันคำสั่งต่อไปนี้ บน Terminal
+<pre class="prettyprint linenums">
+$ npm install
+</pre>
+
+หากต้องการ re-compile asset ให้ใช้คำสั่ง
+<pre class="prettyprint linenums">
+$ npm run dev
+</pre>
+
+หรือ หากต้องการ re-compile asset แบบอัตโนมัติ ให้ใช้คำสั่ง
+<pre class="prettyprint linenums">
+$ npm run watch
+</pre>
+
+
+ทดลอง custom stysheets
+
+ให้สร้างไฟล์ `/resources/sass/_custom.scss`
+
+<pre class="prettyprint linenums">
+body {
+    background-color: blue !important;
+}
+</pre>
+
+หลังจากให้แก้ไขไฟล์ `/resources/sass/app.scss` เพื่อใช้งาน <mark>_custom.scss</mark> ที่พึ่งจะสร้างขึ้นเมื่อสักครู่
+
+ตอนเรียกใช้งานไม่ต้องใส่เครื่องหมาย `_` (underscore)
+
+<pre class="prettyprint linenums">
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+// Custom CSS
+<mark>@import 'custom';</mark>
+</pre>
+
+<br>
+
+
+

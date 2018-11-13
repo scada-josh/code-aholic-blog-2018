@@ -1,0 +1,127 @@
+
+[![ภาพแสดง Slide - Laravel มีอะไรเตรียมไว้ให้เราใช้บ้าง][1]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-001" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-001.png"}
+
+[![ภาพแสดง Slide - การติดตั้่ง Laravel framework][2]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-002" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-002.png"}
+
+<br>
+
+#### เราสามารถติดตั้ง Laravel Project ด้วย composer ได้
+
+---
+
+* Download composer from `https://getcomposer.org` [![external link 15x15][common-05]](https://getcomposer.org){: target="_blank"} 
+* Install Composer
+	<pre class="prettyprint linenums">
+	$ cd /Applications/XAMPP/htdocs
+	$ composer create-project --prefer-dist laravel/laravel blade-project</pre>
+
+* Add V-Hosts and hosts file entry
+
+<br>
+
+#### Laravel มาพร้อมกับ Artisan CLI ซึ่งอำนวยความสะดวกให้เรามากมายหลายอย่าง
+
+---
+
+<pre class="prettyprint linenums">
+$ php artisan list
+$ php artisan help migrate
+$ php artisan make:controller TodosController	# สร้าง controller ชื่อว่า `TodosController`
+$ php artisan make:model Todo -m	# สร้าง model Todo(ใช้เอกพจน์) พร้อมสร้าง migration ด้วย
+$ php artisan make:migration add_todos_to_db --table=todos	# สร้างไฟล์ migration ที่มีชื่อว่า `add_todos_to_db` โดยระบุตาราง todos ไปเลย
+$ php artisan migrate
+$ php artisan tinker	# เป็นคำสั่งที่สามารถ interact กับฐานข้อมูลได้โดยตรง
+</pre>
+
+<br>
+
+#### Eloquent ORM เป็นอีกฟีเจอร์หนึ่งที่น่าสนใจ
+
+---
+
+<pre class="prettyprint linenums">
+Use App\Todo;
+
+$todo = new Todo;
+$todo->title = 'Some Todo';
+$todo->save();
+</pre>
+
+<br>
+
+#### Blade Template Engine ก็เป็นอีกหนึ่งฟีเจอร์ที่น่าสนใจ
+
+---
+
+* Simple & Powerful
+* Control structures (if else, loop, etc.)
+* สามารถใช้ Syntax Php ปกติได้
+	<pre class="prettyprint linenums">
+&lt;?php echo'PHP Tags'; ?&gt;</pre>
+* Template Inheritance: Extend layouts easily
+* Can create custom components
+
+<br>
+
+##### <mark>ตัวอย่าง</mark> การใช้งาน Blade Template (Master)
+
+<pre class="prettyprint linenums">
+&lt;!-- Stored in resources/views/layouts/app.blade.php --&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;{{ app()-&gt;getLocale() }}&quot;&gt;
+&lt;head&gt;
+	&lt;meta charset=&quot;UTF-8&quot;&gt;
+	&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+	&lt;meta name=&quot;csrf-token&quot; content=&quot;{{ csrf_token() }}&quot;&gt;
+	&lt;title&gt;@yield(&quot;title&quot;)&lt;/title&gt;
+
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;{{ URL::asset('css/app.css') }}&quot; type=&quot;text/css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+	@section('side-bar')
+		This is master sidebar.
+	@show
+
+	&lt;div class=&quot;container&quot;&gt;
+		@yield(&quot;content&quot;)
+	&lt;/div&gt;
+	
+	&lt;script src=&quot;{{ URL::asset('js/app.js') }}&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+	
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<br>
+
+##### <mark>ตัวอย่าง</mark> การใช้งาน Blade Template (Extends layout)
+
+<pre class="prettyprint linenums">
+&lt;!-- Stored in resources/views/child.blade.php --&gt;
+
+@extends('layouts.app')
+
+@section('title', 'Page Title')
+
+@section('sidebar')
+	@parent
+
+	&lt;p&gt;This is appended to the master sidebar.&lt;/p&gt;
+@endsection
+
+
+@section('content')
+	&lt;p&gt;This is my body content.&lt;/p&gt;
+@endsection
+</pre>
+
+
+
+

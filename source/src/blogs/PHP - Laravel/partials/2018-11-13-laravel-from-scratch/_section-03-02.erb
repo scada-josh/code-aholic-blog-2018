@@ -1,0 +1,95 @@
+#### การใช้งาน Blade Templating 
+
+---
+
+สร้างไฟล์ `/resources/views/layouts/app.blade.php`
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+&lt;html lang=&quot;{{ str_replace('_', '-', app()-&gt;getLocale()) }}&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+
+        &lt;title&gt;{{ config('app.name')}}&lt;/title&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+        @yield('content')
+    &lt;/body&gt;
+&lt;/html&gt;s
+</pre>
+
+แก้ไขเมธอดใน `PagesController'
+
+<pre class="prettyprint linenums">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PagesController extends Controller
+{
+    public function index(){
+<mark>      $title = 'Welcome to Laravel';
+        // return view('pages.index', compact('title'));
+        return view('pages.index')->with('title', $title);</mark>
+    }
+
+    public function about(){
+<mark>      $title = 'Welcome to Laravel';
+        return view('pages.about')->with('title', $title);</mark>
+    }
+
+    public function services(){
+<mark>      $data = array(
+            'title' =&gt; 'Services',
+            'services' =&gt; ['Web Design', 'Programming', 'SEO']
+        );
+        return view('pages.services')-&gt;with($data);</mark>
+    }
+}
+</pre>
+
+
+แก้ไขไฟล์ `/resources/views/pages/index.blade.php`
+<pre class="prettyprint linenums">
+@extends('layouts.app')
+
+@section('content')
+    &lt;h1&gt; {{ $title }} &lt;/h1&gt;
+    &lt;p&gt;This is the laravel application from the &quot;Laravel from scratch&quot; Youtube series&lt;/p&gt;
+@endsection
+</pre>
+
+
+แก้ไขไฟล์ `/resources/views/pages/about.blade.php`
+<pre class="prettyprint linenums">
+@extends('layouts.app')
+
+@section('content')
+    &lt;h1&gt; &lt;?php echo $title; ?&gt; &lt;/h1&gt;
+    &lt;p&gt;This is about page&lt;/p&gt;
+@endsection
+</pre>
+
+
+แก้ไขไฟล์ `/resources/views/pages/services.blade.php`
+<pre class="prettyprint linenums">
+@extends('layouts.app')
+
+@section('content')
+    &lt;h1&gt; {{ $title }} &lt;/h1&gt;
+    @if(count($services) &gt; 0)
+        &lt;ul&gt;
+        @foreach($services as $service)
+            &lt;li&gt;{{$service}}&lt;/li&gt;
+        @endforeach
+        &lt;/ul&gt;
+    @endif
+@endsection
+</pre>
+
+<br>
+

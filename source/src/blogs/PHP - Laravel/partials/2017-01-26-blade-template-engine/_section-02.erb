@@ -1,0 +1,87 @@
+Laravel 5.x มี  template engine ที่ติดตั้งมาด้วยคือใช้ Blade template
+
+<br/>
+เริ่มต้นสร้างโปรเจ็คใหม่ ด้วย Composer Create-Project
+
+<pre class="prettyprint linenums">
+$ cd /Applications/XAMPP/htdocs
+$ composer create-project --prefer-dist laravel/laravel blade-project
+</pre>
+
+<br/>
+รัน Server (Local Development Server)
+
+<pre class="prettyprint linenums">
+$ cd /Applications/XAMPP/xamppfiles/htdocs/blade-project
+$ php artisan serve
+</pre>
+
+[![ภาพแสดง หน้าเว็บเริ่มต้นของ Laravel][1]](){: .fancybox-button 
+                            data-fancybox-group="blade-template-engine-001" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/blade-template-engine-001.png"}
+
+
+
+<br/>
+สร้าง Controller ชือว่า `EventsController`
+
+<pre class="prettyprint linenums">
+$ php artisan make:controller EventsController
+</pre>
+
+<br/>
+สร้าง action ชือ่วา `action` เข้าไปใน <mark>EventsController</mark> ซึ่งเก็บอยู่ใน `/app/Http/Controllers/EventsController.php`
+
+<pre class="prettyprint linenums">
+public function show($id) {
+	dd($id);
+}
+</pre>
+
+<br/>
+สร้าง Route ในไฟล์ `/routes/web.php`
+
+<pre class="prettyprint linenums">
+Route::get('events/{id}', 'EventsController@show')->name('events.show');
+</pre>
+
+<br/>
+ทดลองเรียกข้อมูลผ่าน browser
+
+<pre class="prettyprint linenums">
+http://localhost:8000/events/42
+</pre>
+
+[![ภาพแสดง หน้าเว็บแสดงผลลัพธ์][2]](){: .fancybox-button 
+                            data-fancybox-group="blade-template-engine-002" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/blade-template-engine-002.png"}
+
+
+
+<br/>
+เพิ่มโค้ดต่อไปนี้ลงใน body ของ `welcome/index.blade.php`
+
+<pre class="prettyprint linenums">
+&lt;p&gt;
+&nbsp;&lt;a href=&quot;{{ route('events.show', ['id' =&gt; 42]) }}&quot;&gt;Laravel Hacking and Coffee&lt;/a&gt;
+&lt;/p&gt;
+</pre>
+
+<br/>
+Reload หน้าเว็บ เราจะพบว่า Laravel จะสร้างโค้ดให้เราอัตโนมัติ
+
+<pre class="prettyprint linenums">
+&lt;a href=&quot;http://localhost:8000/events/42&quot;&gt;Laravel Hacking and Coffee&lt;/a&gt;
+</pre>
+
+
+[![ภาพแสดง หน้าเว็บแสดงผลลัพธ์][3]](){: .fancybox-button 
+                            data-fancybox-group="blade-template-engine-003" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/blade-template-engine-003.png"}
+
+
+
+
+
+
+

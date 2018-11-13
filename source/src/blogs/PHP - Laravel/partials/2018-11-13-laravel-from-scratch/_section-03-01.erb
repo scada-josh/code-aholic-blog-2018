@@ -1,0 +1,167 @@
+#### การใช้งาน Route 
+
+---
+
+การทำส่งค่ากลับเป็น view (จะต้องมี `about.blad.php` ในโฟลเดอร์ `pages`)
+<pre class="prettyprint linenums">
+Route::get('/about', function () {
+    return view('pages.about');
+});
+</pre>
+
+<br>
+
+การทำ Dynamic Route
+<pre class="prettyprint linenums">
+Route::get('/users/{id}', function ($id) {
+    return 'This is user '.$id;
+});
+</pre>
+
+<br>
+
+การทำ Dynamic Route แบบหลายพารามิเตอร์
+<pre class="prettyprint linenums">
+Route::get('/users/{id}/{name}', function ($id, $name) {
+    return 'This is user '.$name.' with an id of '.$id;
+});
+</pre>
+
+<br>
+<br>
+
+
+#### การใช้งาน Controller เบื้องต้น 
+
+---
+
+คำสั่งในการสร้าง Controller ชื่อว่า `PagesController`
+<pre class="prettyprint linenums">
+php artisan make:controller PagesController
+</pre>
+
+เราก็จะได้ `PagesController` เก็บไว้ใน `/app/Http/Controllers/PagesController.php` อัตโนมัติ
+
+<br>
+ทดลองสร้างเมธอด <mark>index</mark>, <mark>about</mark> และ <mark>services</mark> ใน `PagesController'
+
+<pre class="prettyprint linenums">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PagesController extends Controller
+{
+<mark>public function index(){
+    	return view('pages.index');
+    }</mark>
+
+<mark>public function about(){
+    	return view('pages.about');
+    }</mark>
+
+<mark>public function services(){
+    	return view('pages.services');
+    }</mark>
+}
+</pre>
+
+สร้าง Route เพื่อเรียกใช้งาน `PagesController`
+<pre class="prettyprint linenums">
+Route::get('/', 'PagesController@index');
+Route::get('/about', 'PagesController@about');
+Route::get('/services', 'PagesController@services');
+</pre>
+
+---
+
+แก้ไขไฟล์ `/.env` ในส่วนของ APP_NAME = <mark>LSAPP</mark>
+
+...ใน Blade เราสามารถใช้คำสั่ง `{{ config('app.name')}}` เพื่อแสดงค่า config. ในส่วนของ APP_NAME ได้
+
+หากต้องการกำหนดค่า สามารถทำได้โดยใช้คำสั่ง `{{ config('app.name', 'LSAPP')}}`
+
+
+
+สร้างไฟล์ `/resources/views/pages/index.blade.php`
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+&lt;html lang=&quot;{{ str_replace('_', '-', app()-&gt;getLocale()) }}&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+
+        &lt;title&gt;{{ config('app.name')}}&lt;/title&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Welcome to Laravel &lt;/h1&gt;
+        &lt;p&gt;This is the laravel application from the &quot;Laravel from scratch&quot; Youtube series&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+สร้างไฟล์ `/resources/views/pages/about.blade.php`
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+&lt;html lang=&quot;{{ str_replace('_', '-', app()-&gt;getLocale()) }}&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+
+        &lt;title&gt;{{ config('app.name')}}&lt;/title&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;About &lt;/h1&gt;
+        &lt;p&gt;This is about page&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+สร้างไฟล์ `/resources/views/pages/services.blade.php`
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+&lt;html lang=&quot;{{ str_replace('_', '-', app()-&gt;getLocale()) }}&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+
+        &lt;title&gt;{{ config('app.name')}}&lt;/title&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Services &lt;/h1&gt;
+        &lt;p&gt;This is services page&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+ทดสอบเรียกใช้งานผ่านบราวเซอร์ `http://lsapp.dev/`
+
+[![ภาพแสดง ผลลัพธ์][8]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-008" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-008.png"}
+
+ทดสอบเรียกใช้งานผ่านบราวเซอร์ `http://lsapp.dev/about`
+
+[![ภาพแสดง ผลลัพธ์][9]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-009" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-009.png"}
+
+ทดสอบเรียกใช้งานผ่านบราวเซอร์ `http://lsapp.dev/services`
+
+[![ภาพแสดง ผลลัพธ์][10]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-010" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-010.png"}
+
+<br>
+
+
+

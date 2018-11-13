@@ -1,0 +1,32 @@
+
+<br/>
+
+การสร้างออบเจ็กต์ในคลาสและการเรียกใช้งาน
+
+<pre class="prettyprint linenums">
+myShop = shop()
+myShop.shopName = 'NanaBook Store'
+print 'My shop is :', myShop.shopName 
+
+book1 = product()
+book2 = productA()
+
+myBook1 = productB('photoshop', 299)
+print myBook1.prodID
+myBook1.dispProduct()
+print 'SaleAmount: ', myBook1.saleAmount(3)
+
+myBook2 = productB('Microsof word', 179)
+print myBook2.prodID
+myBook2.dispProduct()
+print 'SaleAmount: ', myBook2.saleAmount(3)
+
+em = earn()
+print 'Narong earn :', em.myEarn()
+emp = earn('Tanong', 10, 60)
+print emp.name, 'earn : ', emp.myEarn()
+
+del myBook1	#ลบออบเจ็กต์ ผลลัพธ์คือ ออบเจ็กต์ของคลาสนั้นจะถูกทำลายและคืนหน่วยความจำด้วยการทำงานของ Garbage Collection
+
+</pre>
+

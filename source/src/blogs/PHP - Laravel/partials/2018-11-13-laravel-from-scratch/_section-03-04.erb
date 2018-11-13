@@ -1,0 +1,122 @@
+#### ปรับแต่งเมนู (Navigation Bar)
+
+---
+
+สร้างไฟล์ `/resources/views/inc/navbar.blade.php`
+
+ที่มาของ Navbar [![external link 15x15][common-05]](http://getbootstrap.com/docs/4.1/examples/starter-template/){: target="_blank"}
+
+<pre class="prettyprint linenums">
+&lt;nav class=&quot;navbar navbar-expand-md navbar-dark bg-dark &quot;&gt;
+    &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;{{ config('app.name', 'LSAPP')}}&lt;/a&gt;
+    &lt;button class=&quot;navbar-toggler&quot; type=&quot;button&quot; data-toggle=&quot;collapse&quot; data-target=&quot;#navbarsExampleDefault&quot; aria-controls=&quot;navbarsExampleDefault&quot; aria-expanded=&quot;false&quot; aria-label=&quot;Toggle navigation&quot;&gt;
+        &lt;span class=&quot;navbar-toggler-icon&quot;&gt;&lt;/span&gt;
+    &lt;/button&gt;
+
+    &lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;navbarsExampleDefault&quot;&gt;
+        &lt;ul class=&quot;navbar-nav mr-auto&quot;&gt;
+            &lt;li class=&quot;nav-item&quot;&gt;
+                &lt;a class=&quot;nav-link&quot; href=&quot;/&quot;&gt;Home &lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li class=&quot;nav-item&quot;&gt;
+                &lt;a class=&quot;nav-link&quot; href=&quot;/about&quot;&gt;About&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li class=&quot;nav-item&quot;&gt;
+                &lt;a class=&quot;nav-link&quot; href=&quot;/services&quot;&gt;Services&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+</pre>
+
+<br>
+
+แก้ไขไฟล์ `/resources/views/layouts/app.blade.php`
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+&lt;html lang=&quot;{{ str_replace('_', '-', app()-&gt;getLocale()) }}&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;{{ asset('css/app.css') }}&quot; type=&quot;text/css&quot;&gt;
+        &lt;title&gt;{{ config('app.name', 'LSAPP')}}&lt;/title&gt;
+
+    &lt;/head&gt;
+    &lt;body&gt;
+        <mark>@include('inc.navbar')</mark>
+        
+        &lt;br&gt;
+        
+        &lt;div class=&quot;container&quot;&gt;
+            @yield('content')
+        &lt;/div&gt;
+        
+        <mark>&lt;script src=&quot;{{ asset('js/app.js') }}&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</mark>
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<br>
+
+แก้ไขไฟล์ `/resources/views/pages/index.blade.php`
+
+<pre class="prettyprint linenums">
+@extends('layouts.app')
+
+@section('content')
+
+    &lt;div class=&quot;jumbotron&quot;&gt;
+      &lt;h1 class=&quot;display-4&quot;&gt;{{ $title }}&lt;/h1&gt;
+      &lt;p&gt;This is the laravel application from the &quot;Laravel from scratch&quot; Youtube series&lt;/p&gt;
+      &lt;hr class=&quot;my-4&quot;&gt;
+      
+      &lt;a class=&quot;btn btn-primary btn-lg&quot; href=&quot;/login&quot; role=&quot;button&quot;&gt;Login&lt;/a&gt;
+      &lt;a class=&quot;btn btn-primary btn-lg&quot; href=&quot;/register&quot; role=&quot;button&quot;&gt;Register&lt;/a&gt;
+    &lt;/div&gt;
+
+    
+@endsection
+</pre>
+
+<br>
+
+แก้ไขไฟล์ `/resources/views/pages/index.blade.php`
+
+<pre class="prettyprint linenums">
+@extends('layouts.app')
+
+@section('content')
+    &lt;h1&gt; {{ $title }} &lt;/h1&gt;
+    @if(count($services) &gt; 0)
+        &lt;ul <mark>class=&quot;list-group&quot;</mark>&gt;
+        @foreach($services as $service)
+            &lt;li <mark>class=&quot;list-group-item&quot;</mark>&gt;{{$service}}&lt;/li&gt;
+        @endforeach
+        &lt;/ul&gt;
+    @endif
+@endsection
+</pre>
+
+<br>
+
+ทดสอบเรียกใช้งานผ่านบราวเซอร์ `http://lsapp.dev/`
+
+[![ภาพแสดง ผลลัพธ์][11]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-011" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-011.png"}
+
+ทดสอบเรียกใช้งานผ่านบราวเซอร์ `http://lsapp.dev/about`
+
+[![ภาพแสดง ผลลัพธ์][12]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-012" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-012.png"}
+
+ทดสอบเรียกใช้งานผ่านบราวเซอร์ `http://lsapp.dev/services`
+
+[![ภาพแสดง ผลลัพธ์][13]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-013" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-013.png"}
+
+<br>
+

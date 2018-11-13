@@ -1,0 +1,43 @@
+
+สร้างไฟล์ parent.py
+
+<pre class="prettyprint linenums">
+# -*- coding: utf-8 -*- 
+
+class Shape:
+	"""Parent Class"""		# สร้างคลาสแม่ชื่อ Shape
+	def __init__(self, width, height):
+		self.width = width
+		self.height = height
+
+</pre>
+
+<br/>
+
+สร้างไฟล์ child.py
+
+<pre class="prettyprint linenums">
+# -*- coding: utf-8 -*- 
+import parent
+
+class Rectangle(parent.Shape):
+	def area(self):
+		return self.width * self.height
+
+
+print 'Area of Reactangle Calculation \n Please enter values for calculate.'
+w = int(input('Enter width : '))
+h = int(input('Enter height : '))
+
+rect = Rectangle(w, h)
+print 'Rectangle area : ', rect.area()	
+
+</pre>
+
+<br/>
+
+หลังจากนั้นให้ทดลองรันคำสั่ง
+
+<pre class="prettyprint linenums">
+$ python /Users/osx/Documents/Workspaces/Python/python-oop/child.py
+</pre>

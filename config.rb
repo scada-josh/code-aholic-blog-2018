@@ -188,6 +188,13 @@ set :categoryURL_esp8266Index, "/src/blogs/esp8266/2016/12/24/esp8266-index/"
 set :categoryURL_flaskIndex, "/src/blogs/flask/2017/01/04/flask-index/"
 set :categoryURL_raspberryPiIndex, "/src/blogs/raspberry-pi/2017/01/10/raspberry-pi-index/"
 set :categoryURL_mqttIndex, "/src/blogs/mqtt/2017/01/10/mqtt-index/"
+set :categoryURL_djangoIndex, "/src/blogs/django/2018/11/07/django-index/"
+set :categoryURL_dataSciencePathwayIndex, "/src/blogs/data-science-pathway/2018/11/07/data-science-pathway-index/"
+set :categoryURL_competingInADataDrivenWorldIndex, "/src/blogs/competing-in-a-data-driven-world/2018/11/07/competing-in-a-data-driven-world-index/"
+set :categoryURL_dataAnalyticsAndBigDataIndex, "/src/blogs/data-analytics-and-big-data/2018/11/07/data-analytics-and-big-data-index/"
+set :categoryURL_practicalDataAnalyticsUsingRapidMinerIndex, "/src/blogs/practical-data-analytics-using-rapidminer/2018/11/07/practical-data-analytics-using-rapid-miner-index/"                               
+set :categoryURL_pythonForDataScienceIndex, "/src/blogs/python-for-data-science/2018/11/07/python-for-data-science-index/"
+
 
 
 # Build-specific configuration

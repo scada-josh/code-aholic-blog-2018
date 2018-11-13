@@ -1,0 +1,114 @@
+#### ติดตั้งเครื่องมือสำหรับพัฒนาระบบ
+
+---
+
+* ติดตั้ง `XAMPP` [![external link 15x15][common-05]](https://www.apachefriends.org/download.html){: target="_blank"}
+* ติดตั้ง `composer` [![external link 15x15][common-05]](https://getcomposer.org){: target="_blank"} 
+* ติดตั้่ง `Git` [![external link 15x15][common-05]](https://www.git-scm.com){: target="_blank"}
+* ติดตั้่ง `Visual Studio Code` [![external link 15x15][common-05]](https://code.visualstudio.com){: target="_blank"}
+
+<br>
+
+#### ติดตั้ง Laravel Project
+
+---
+
+<pre class="prettyprint linenums">
+$ cd /Applications/XAMPP/xamppfiles/htdocs
+$ composer create-project --prefer-dist laravel/laravel lsapp
+</pre>
+
+<br>
+
+หลังจากติดตั้ง Laravel (v5.7.13) เสร็จแล้ว ให้เข้าไปในโปรเจ็คที่เราติดตั้ง (เมื่อสักครู่)
+
+<pre class="prettyprint linenums">
+$ cd /Applications/XAMPP/xamppfiles/htdocs/lsapp
+$ chmod -R 777 storage 		//full rights 777
+</pre>
+
+<br>
+
+ให้ทำการเปิดบราวเซอร์ `http://localhost/lsapp/public/`
+
+[![ภาพแสดง ผลลัพธ์ ของ artisan server][3]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-003" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-003.png"}
+
+
+<br>
+
+#### สร้าง Virtual Host [![external link 30x30][common-05]](https://medium.com/@sunilk/laravel-development-guide-setting-up-laravel-on-mac-os-with-xampp-f6d18bb2b55d){: target="_blank"}
+
+---
+
+
+
+แก้ไขไฟล์ `/Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf`
+<br>
+ให้เพิ่ม config. ต่อไปนี้ ลงไปในท้ายไฟล์
+<br>
+
+
+<pre class="prettyprint linenums">
+&lt;VirtualHost *:80&gt;
+    DocumentRoot &quot;/Applications/XAMPP/xamppfiles/htdocs&quot;
+    ServerName localhost
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    DocumentRoot &quot;/Applications/XAMPP/xamppfiles/htdocs/lsapp/public&quot;
+    ServerName lsapp.dev
+&lt;/VirtualHost&gt;
+</pre>
+
+
+<br>
+
+[![ภาพแสดง ไฟล์ httpd-vhosts.conf][6]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-006" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-006.png"}
+
+<br>
+
+แก้ไขไฟล์ Host file (เครื่อง Mac) [![external link 15x15][common-05]](https://www.imore.com/how-edit-your-macs-hosts-file-and-why-you-would-want){: target="_blank"}
+
+<pre class="prettyprint linenums">
+$ sudo nano /etc/hosts
+</pre>
+
+<pre class="prettyprint linenums">
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost 
+fe80::1%lo0	localhost
+192.168.1.10	homestead.test
+192.168.2.10	hackerpair.test
+<mark>127.0.0.1	lsapp.dev</mark>
+</pre>
+
+** Important:** In order to enable custom virtual hosts to work you need to uncomment below in `/Applications/XAMPP/xamppfiles/etc/httpd.conf`
+
+[![ภาพแสดง การเอา comment ในไฟล์ออก][4]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-004" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-004.png"}
+
+หลังจากนั้นให้ Restart `Apache Web Server`
+
+<br>
+
+ให้ทำการเปิดบราวเซอร์ `http://lsapp.dev`
+
+[![ภาพแสดง ผลลัพธ์ ของ artisan server][5]](){: .fancybox-button 
+                            data-fancybox-group="laravel-from-scratch-005" 
+                            href="<%= current_page.data.baseURL %>images/categories/PHP - Laravel/laravel-from-scratch-005.png"}
+
+
+
+

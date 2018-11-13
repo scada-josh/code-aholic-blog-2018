@@ -1,0 +1,31 @@
+
+<pre class="prettyprint linenums">
+$ source venv/bin/activate
+</pre>
+
+[![ภาพแสดง การใช้งาน virtualenv ด้วยคำสั่งบน terminal][4]](){: .fancybox-button 
+                            data-fancybox-group="python-environment" 
+                            href="<%= current_page.data.baseURL %>images/categories/python/python-environment-004.png"}
+
+
+You should see a `(venv)` appear at the beginning of your terminal prompt indicating that you are working inside the virtualenv. Now when you install something like this:
+
+
+<pre class="prettyprint linenums">
+$ pip install &lt;package&gt;
+</pre>
+
+เช่น 
+
+<pre class="prettyprint linenums">
+$ pip install django==1.11.2
+</pre>
+
+<br>
+
+เราสามารถตรวจสอบ package ที่เราติดตั้งไปแล้วได้ โดยใช้คำสั่ง
+
+<pre class="prettyprint linenums">
+$ pip freeze
+</pre>
+

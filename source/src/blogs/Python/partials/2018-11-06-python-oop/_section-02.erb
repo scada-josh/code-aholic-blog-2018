@@ -1,0 +1,86 @@
+
+<br/>
+**สร้างคลาส product** : ซึ่งเป็นคลาสว่างเปล่า โดยต้องใส่คำสั่ง `pass` เข้าไปด้วย
+
+<pre class="prettyprint linenums">
+# -*- coding: utf-8 -*- 
+class product:
+	"""Product of my company"""		# ใส่คำอธิบายเกี่ยวกับในคลาส
+	pass					# ใส่คำสั่ง pass แสดงว่าเป็นคลาสว่างเปล่า (ไม่มีสมาชิก)
+
+</pre>
+
+<br/>
+**สร้างคลาส productA** : พร้อมกำหนดตัวแปรที่ประกาศภายในคลาส (`Class variable`) ด้วย
+
+<pre class="prettyprint linenums">
+class productA:
+	"""Product of my company"""
+	prodID = 0				# กำหนดตัวแปรในคลาส
+</pre>
+
+
+<br/>
+**สร้างคลาส productB** : ที่มีทั้งคอนสตรักเตอร์และดีสตรักเตอร์ และมีเมธอด 2 เมธอด
+<br/>
+สำหรับ `คอนสตรักเตอร์ (Constructor)` คือ ตัวแปรของอินสแตนซ์ (`Instance Variables`) ซึ่งเป็นเมธอดหรือฟังก์ชันพิเศษที่จะเริ่มทำงานทันทีเมื่อออบเจ็กต์สร้างขึ้นมาใหม่จากคลาส
+<br/>
+
+`เมธอด (Method)` เป็นฟังก์ชันการทำงานที่สร้างขึ้นภายในคลาส ซึ่งเมธอดจะถูกแชร์ให้ทำงานบนออบเจ็กต์ต่างๆ ที่เป็นอินสแตนซ์ของคลาส หากกำหนดพารามิเตอร์เป็น `self` ใน `()` จะเป็นการอ้างถึงข้อมูลจากตัวแปรของออบเจ็กต์ตัวเอง
+
+<br/>
+
+`ดีสตรักเตอร์ (Destructor)` เป็นเมธอดพิเศษของคลาสจะถูกเรียกขึ้นมาทำานอัตโนมัติเมื่อออบเจ็กต์ของคลาสนั้นถูกทำลาย เพื่อปลดปล่อยทรัพยากรก่อนที่จะออกจากโปรแกรมและคืนหน่วยความจำด้วยการทำงานของ Gabage Collection หลังจากที่มีการใช้คำสั่งในการลบออบเจ็กต์ (คำสั่ง `del`) จากนั้นดีสตรักเตอร์จะทำงานโดยเรียกใช้เมธอดชื่อ `__del__()`
+
+<pre class="prettyprint linenums">
+class productB:
+	"""Product of my company"""
+	prodID = 0
+
+	def __init__(self, name, price):
+		self.name = name
+		self.price = price
+		productB.prodID += 1
+
+	def __del__(self):
+		print 'destructor ', self.name
+
+	def dispProduct(self):
+		print 'Name: ', self.name , ', Salary: ', self.price
+
+	def saleAmount(self, amount):
+		return (self.price * amount)
+</pre>
+
+<br/>
+**สร้างคลาส earn** : พร้อมกำหนดเมธอด <mark>myEarn</mark> และมีการส่งค่ากลับ (return) ไปด้วย
+<br/>
+...จะสังเกตเห็นว่าจะมีการกำหนดค่าดีฟอลต์ให้คอนสตรักเตอร์ เพื่อป้องกันข้อผิดพลาดที่อาจจะเกิดขึ้น
+
+<pre class="prettyprint linenums">
+class earn:
+	"""docstring for earn"""
+	earnNum = 0
+
+	def __init__(self, name = 'emp', hour = 8, rate = 50):
+		self.name = name
+		self.hour = hour
+		self.rate = rate
+		earn.earnNum += 1
+
+	def myEarn(self):
+		return (self.hour * self.rate)
+		
+</pre>
+
+<br/>
+**สร้างคลาส shop**
+
+<pre class="prettyprint linenums">
+class shop:
+	"""This is my shop class"""
+	shopName = ''
+</pre>
+
+
+
